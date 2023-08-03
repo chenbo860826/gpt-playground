@@ -14,8 +14,10 @@ $('#resetBtn').click(resetAll);
 $(document).ready(async () => {
     let query = getQueryParams();
 
-    // render each entries
+    // render entries, and contents
     let entity = await renderChats();
+    $('#contents').append(renderContents(entity));
+    createJelem(SlideBar, { key: 'contentspanel.width' }).appendTo($('#leftPanel')).wrap().load();
 
     // popup login panel if not logged in
     if (!isLoggedIn()) {
@@ -31,8 +33,5 @@ $(document).ready(async () => {
                 $('#resetBtn').text(`Reset${totalChanges ? (' (' + totalChanges + ')') : ''}`).attr('disabled', totalChanges <= 0);
             }
         })
-
-        $('#contents').append(renderContents(entity));
-        createJelem(SlideBar, { key: 'contentspanel.width' }).appendTo($('#leftPanel')).wrap().load();
     }
 })
