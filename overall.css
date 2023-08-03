@@ -1,0 +1,49 @@
+body, table, td, th {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+body{
+    margin: 0px;
+}
+#logoutBtn{
+    margin-left: 5px;
+    width: 60px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+#logoutBtn:hover {
+    color: #DDDDDD;
+}
+#logoutBtn:visited, :link {
+    color: #FFFFFF;
+}
+#clearBtn{
+    margin-left: 5px;
+    width: 100px;
+    height: 24px;
+}
+.button_h1h {
+    background-color: #0052CC;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 10px 8px 10px;
+    cursor: hand;
+}
+.button_h1h[disabled] {
+    background-color: #CCCCCC;
+}
+.button_h1 {
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 10px 8px 10px;
+    cursor: hand;
+}
+.button_h1[disabled] {
+}

@@ -1,0 +1,28 @@
+<link rel="stylesheet" type="text/css" href="./overall.css">
+<link rel="shortcut icon" href="pic/roboicon.svg" />
+
+<script src="./lib/jquery-3.6.0.min.js"></script>
+<script src="./lib/lodash.min.js"></script>
+<script src="./lib/jelem-1.0.0.min.js"></script>
+<script src="./lib/backend.js"></script>
+
+<body>
+    <div style="display:flex; flex-direction:column; height:100%">
+        <div style="flex:0 0 25px; padding: 10px 10px 5px 10px; background: #999999; text-align: right">
+            <button id="saveBtn" disabled="true" class="button_h1h">Save All</button>
+            <button id="resetBtn" disabled="true" class="button_h1">Reset</button>
+            <a id="logoutBtn" href="javascript:">LogOut</a>
+            <button id="clearBtn">Clear</button></div>
+        <div style="flex:1 1; overflow:hidden; display: flex;">
+            <div style="flex:0 0 200px; display: flex; height: 100%; overflow:hidden;" id="leftPanel">
+                <div id="contents" style="flex: 1 1; overflow:auto; background-color: #FAFBFC; padding-top:5px"></div>
+            </div>
+            <div style="flex:1 1; overflow:scroll; padding: 10px 10px 10px 0px">
+                <div id="chatEditor"></div>
+            </div>
+            <div style="flex:1 1; overflow:scroll; padding: 5px; white-space: pre-wrap; background-color: #EEEEEE;" id="output"></div>
+        </div>
+    </div>
+</body>
+
+<script type="module" src="index.js"></script>
