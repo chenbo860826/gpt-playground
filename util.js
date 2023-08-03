@@ -1,4 +1,4 @@
-import { renderField, parseField, loadModel } from '../medit/index.js';
+import { renderField, parseField, loadModel } from './medit.js';
 
 export function clearOutput() {
     $('#output').html('');
