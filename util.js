@@ -22,7 +22,8 @@ let chatMeta = {
             "type": "enum",
             "options": [
                 {"key": "gpt-4"},
-                {"key": "gpt-3.5-turbo"}
+                {"key": "gpt-3.5-turbo"},
+                {"key": "gpt-3.5-turbo-16k"}
             ]
         },
         {
