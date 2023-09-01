@@ -89,11 +89,12 @@ export class ChatResponse {
 
                 try {
                     // make the raw request for streaming purpose
-                    let response = await fetch(`https://api.openai.com/v1/chat/completions`, {
+                    const { appKey, url } = getCredential();
+                    let response = await fetch(url, {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + getCredential()
+                            'Authorization': 'Bearer ' + appKey
                         },
                         body: JSON.stringify(postData)
                     });

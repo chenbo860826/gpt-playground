@@ -21,9 +21,9 @@ let chatMeta = {
             "key": "model",
             "type": "enum",
             "options": [
-                {"key": "gpt-4"},
-                {"key": "gpt-3.5-turbo"},
-                {"key": "gpt-3.5-turbo-16k"}
+                { "key": "gpt-4" },
+                { "key": "gpt-3.5-turbo" },
+                { "key": "gpt-3.5-turbo-16k" }
             ]
         },
         {
@@ -110,5 +110,7 @@ export function isLoggedIn() {
 }
 
 export function getCredential() {
-    return credential;
+    // credential compose of 2 parts: appKey@serviceUrl
+    let parts = credential.split('@');
+    return { appKey: parts[0], url: parts[1] || 'https://api.openai.com/v1/chat/completions' };
 }
