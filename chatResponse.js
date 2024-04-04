@@ -81,12 +81,16 @@ export class ChatResponse {
             async run(postData) {
                 let outputter = this.children(':last-child');
                 const start = Date.now();
-                let parsedBody = '';
 
                 // append history information
                 let historyZone = outputter.prev().prev();
                 historyZone.html('').append(postData.messages.map(i => ChatResponse.makePiece(i.role, i.content)));
 
+                // prepare tail for streaming
+                let tail = document.createTextNode("▌")
+                outputter.append(tail);
+
+                // then try communicate
                 try {
                     // make the raw request for streaming purpose
                     const { appKey, url } = getCredential();
@@ -118,9 +122,10 @@ export class ChatResponse {
 
                         let lines = parser.feed(value);
                         if (lines) {
-                            parsedBody += lines.map(i => i.choices[0].delta.content).filter(i => !!i).join('');
-                            outputter.text(parsedBody + '▌');
-                            
+                            let newText = lines.map(i => i.choices[0].delta.content).filter(i => !!i).join('');
+                            tail.textContent = newText;
+                            tail = document.createTextNode("▌")
+                            outputter.append(tail);
                             // try to scroll to bottom 
                             if(atBottom) {
                                 scrollable.scrollTop = scrollable.scrollHeight;
@@ -128,12 +133,14 @@ export class ChatResponse {
                         }
                     }
 
-                    // enable the add button, finally
-                    outputter.text(parsedBody);
-                    this.children(':first-child').children('button').attr('disabled', false);
+                    // Remarks: Simply remove tail, instead of replace the whole text of outputter to avoid reset
+                    // user's selection, like what outputter.text(...) does.
+                    tail.remove();
+                    this.children(':first-child').children('button').attr('disabled', false); // enable the add button, finally
                 }
                 catch (e) {
-                    outputter.text(parsedBody).append($('<div/>', { style: 'color:red' }).text(e.toString()));
+                    tail.remove();
+                    outputter.append($('<div/>', { style: 'color:red' }).text(e.toString()));
                 }
                 this.children(':first-child').children(':first-child').append(` (${((Date.now() - start) / 1000).toFixed(1)}s)`);
             }
