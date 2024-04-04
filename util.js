@@ -68,7 +68,8 @@ export async function renderChats() {
     entityList = await loadModel(`localstorage://entities/chats`, chatMeta, null, (data)=>{
         // make it backward compatible for max_tokens, and messages fields (obsolete as maxTokens, prompts)
         if(data.prompts && !data.messages) {
-            data.messages = data.prompts.map(i => ({ role: i.role, content: i.prompt }));
+            data.prompts.forEach(i => {i.content = i.prompt; delete i.prompt;})
+            data.messages = data.prompts;
             delete data.prompts;
         }
         if(data.maxTokens && !data.max_tokens) {
@@ -83,10 +84,7 @@ export async function renderChats() {
 
 export function addPromptToContext(id, content) {
     let model = entityList.find(i => i._id == id);
-    let newPrompt = model.messages.push({
-        role: 'assistant',
-        prompt: content
-    });
+    let newPrompt = model.messages.push({role: 'assistant', content});
     newPrompt.getListener().publish({ type: 'focus' })
 }
 
