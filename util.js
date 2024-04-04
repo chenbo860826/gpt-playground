@@ -33,7 +33,7 @@ let chatMeta = {
             "type": "number"
         },
         {
-            "key": "maxTokens",
+            "key": "max_tokens",
             "type": "number"
         },
         {
@@ -41,7 +41,7 @@ let chatMeta = {
             "type": "text"
         },
         {
-            "key": "prompts",
+            "key": "messages",
             "type": "object",
             "array": true,
             "fields": [
@@ -54,7 +54,7 @@ let chatMeta = {
                     ]
                 },
                 {
-                    "key": "prompt",
+                    "key": "content",
                     "type": "text"
                 }
             ]
@@ -65,14 +65,25 @@ let chatMeta = {
 let entityList;
 
 export async function renderChats() {
-    entityList = await loadModel(`localstorage://entities/chats`, chatMeta);
+    entityList = await loadModel(`localstorage://entities/chats`, chatMeta, null, (data)=>{
+        // make it backward compatible for max_tokens, and messages fields (obsolete as maxTokens, prompts)
+        if(data.prompts && !data.messages) {
+            data.messages = data.prompts.map(i => ({ role: i.role, content: i.prompt }));
+            delete data.prompts;
+        }
+        if(data.maxTokens && !data.max_tokens) {
+            data.max_tokens = data.maxTokens;
+            delete data.maxTokens;
+        }
+        return data;
+    });
     $('#chatEditor').append(renderField(entityList, null, { writable: true }));
     return entityList;
 }
 
 export function addPromptToContext(id, content) {
     let model = entityList.find(i => i._id == id);
-    let newPrompt = model.prompts.push({
+    let newPrompt = model.messages.push({
         role: 'assistant',
         prompt: content
     });

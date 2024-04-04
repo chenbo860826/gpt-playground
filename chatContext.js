@@ -24,7 +24,7 @@ class ChatContext {
 
       async test() {
         let entity = this.prop('entity');
-        let messages = entity.prompts.map(i => ({ role: i.role, content: i.prompt }));
+        let messages = entity.messages.map(i => ({ role: i.role, content: i.content }));
         if(entity.system) {
           messages.unshift({ role: 'system', content: entity.system });
         }
@@ -34,7 +34,7 @@ class ChatContext {
           model: entity.model,
           stream: true,
           temperature: entity.temperature !== null ? entity.temperature : undefined, // 0 shall be allowed
-          max_tokens: entity.maxTokens || undefined,
+          max_tokens: entity.max_tokens || undefined,
           messages
         });
       }
