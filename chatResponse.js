@@ -34,24 +34,24 @@ export class ChatResponse {
                     .append(
                         $('<button/>', { style: 'margin-left:auto;', disabled: true })
                             .text('add to prompt')
-                            .click(event => getJelem(event.target, ChatResponse).wrap().addToPrompt())
+                            .click(event => getWrapJelem(event.target).addToPrompt())
                     )
                     .append(
                         $('<img/>', { src: 'pic/close.png', style: 'height: 16px; argin-left:10px; margin-left:10px; cursor:hand' })
-                            .click(event => getJelem(event.target, ChatResponse).remove())
+                            .click(event => getWrapJelem(event.target).remove())
                     )
             )
             .append($('<div/>', { style: 'display:none' }))
             .append(
                 $('<div/>', { style: 'background: url("pic/downArrow.png") no-repeat center; height:16px; border:1px solid gray; margin:5px; transform:none' })
-                    .click((event) => getJelem(event.target, ChatResponse).wrap().switchHstory())
+                    .click((event) => getWrapJelem(event.target).switchHstory())
             )
             .append(ChatResponse.makePiece('assistant', ''))
     }
 
     css() {
         return {
-            '': 'border: 1px solid #999999; margin: 10px 5px 10px 5px; background-color: white',
+            '': 'border: 1px solid #999999; border-radius: 3px; margin: 10px 5px 10px 5px; background-color: white',
             '>div:first-child': 'background-color:#CCCCCC; display:flex; align-items:center; padding:2px; background-color:#CCCCCC;',
             '.chatPiece': 'padding: 5px 5px 5px 37px; background-repeat: no-repeat; min-height:22px; margin:5px'
         }

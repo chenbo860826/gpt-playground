@@ -21,6 +21,7 @@ let chatMeta = {
             "key": "model",
             "type": "enum",
             "options": [
+                { "key": "gpt-4o-2024-05-13" },
                 { "key": "gpt-4" },
                 { "key": "gpt-4-0613" },
                 { "key": "gpt-4-1106-preview" },
