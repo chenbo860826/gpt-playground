@@ -34,17 +34,17 @@ export class ChatResponse {
                     .append(
                         $('<button/>', { style: 'margin-left:auto;', disabled: true })
                             .text('add to prompt')
-                            .click(event => getWrapJelem(event.target).addToPrompt())
+                            .click(event => getJelem(event.target).wrap().addToPrompt())
                     )
                     .append(
                         $('<img/>', { src: 'pic/close.png', style: 'height: 16px; argin-left:10px; margin-left:10px; cursor:hand' })
-                            .click(event => getWrapJelem(event.target).remove())
+                            .click(event => getJelem(event.target).remove())
                     )
             )
             .append($('<div/>', { style: 'display:none' }))
             .append(
                 $('<div/>', { style: 'background: url("pic/downArrow.png") no-repeat center; height:16px; border:1px solid gray; margin:5px; transform:none' })
-                    .click((event) => getWrapJelem(event.target).switchHstory())
+                    .click((event) => getJelem(event.target).wrap().switchHstory())
             )
             .append(ChatResponse.makePiece('assistant', ''))
     }

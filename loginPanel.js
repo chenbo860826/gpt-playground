@@ -7,8 +7,8 @@ export class LoginPanel {
             .append($('<div/>', { style: 'display: none; align-items: center; justify-content: center; background-color: #f50057; color: white' }))
             .append($('<div/>', { style: '' }).text('OpenAI Key'))
             .append($('<input/>'))
-            .append($('<button/>', { style: '' }).text('Log In').click((event) => getWrapJelem(event.target).login()))
-            .on('close', (event) => getWrapJelem(event.target).remove()) // remove itself when closed
+            .append($('<button/>', { style: '' }).text('Log In').click((event) => getJelem(event.target).wrap().login()))
+            .on('close', (event) => getJelem(event.target).remove()) // remove itself when closed
 
         // then return the panel
         return panel;

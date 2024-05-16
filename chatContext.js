@@ -11,7 +11,7 @@ class ChatContext {
       .append($('<div/>', { style: 'text-align: right; padding: 2px;' })
         .append($('<button/>', { class: CSS.BUTTON_H2H, style: 'padding-left:20px; padding-right: 20px; background-color: #00CC00' })
           .text('try')
-          .click((event) => getWrapJelem(event.target).test())
+          .click((event) => getJelem(event.target).wrap().test())
         )
       )
   }
