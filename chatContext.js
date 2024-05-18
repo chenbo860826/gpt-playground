@@ -16,6 +16,13 @@ class ChatContext {
       )
   }
 
+  shortcuts(containerJelem, jelem) {
+    containerJelem.append($('<button/>', { class: CSS.BUTTON_H2H, style: 'padding-left:20px; padding-right: 20px; background-color: #00CC00' })
+      .text('try')
+      .mousedown(() => jelem.wrap().test())
+    )
+  }
+
   wrap() {
     return class {
       parse() {
