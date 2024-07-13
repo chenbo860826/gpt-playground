@@ -1,1 +1,1 @@
-export * from './lib/medit-1.0.8.min.js'
+export * from './lib/medit-1.1.1.min.js'
