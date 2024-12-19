@@ -37,12 +37,32 @@ class ChatContext {
         }
         let responseJelem = createJelem(ChatResponse, entity).appendTo($('#output'));
         responseJelem.get(0).scrollIntoView(); // focus the new ChatResponse
+        // try get response_format
+        let response_format;
+        if(entity.response_format) {
+          response_format = { type: entity.response_format };
+          if(entity.response_format == 'json_schema') {
+            try {
+              response_format.json_schema = {
+                name: entity.json_schema.name,
+                strict: entity.json_schema.strict,
+                schema: JSON.parse(entity.json_schema.schema)
+              };
+            }
+            catch(e) {
+              await responseJelem.wrap().showError('Failed to build json_schema:\n' + e.message);
+              return;
+            }
+          }
+        }
+        // make it run
         await responseJelem.wrap().run({
           model: entity.model,
           stream: true,
           temperature: entity.temperature !== null ? entity.temperature : undefined, // 0 shall be allowed
           max_tokens: entity.max_tokens || undefined,
-          messages
+          messages,
+          ... response_format ? { response_format } : null
         });
       }
     }

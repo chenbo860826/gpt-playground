@@ -42,6 +42,35 @@ let chatMeta = {
             "type": "number"
         },
         {
+            "key": "response_format",
+            "type": "enum",
+            "options": [
+                { "key": "<unspecified>", "value": "" },
+                { "key": "text" },
+                { "key": "json_object" },
+                { "key": "json_schema" }
+            ]
+        },
+        {
+            "key": "json_schema",
+            "type": "object",
+            "cond": { "response_format": "json_schema" },
+            "fields": [
+                {
+                    "key": "name",
+                    "type": "string"
+                },
+                {
+                    "key": "strict",
+                    "type": "boolean"
+                },
+                {
+                    "key": "schema",
+                    "type": "text"
+                }
+            ]
+        },
+        {
             "key": "system",
             "type": "text"
         },

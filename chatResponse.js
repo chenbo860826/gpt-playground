@@ -140,9 +140,13 @@ export class ChatResponse {
                 }
                 catch (e) {
                     tail.remove();
-                    outputter.append($('<div/>', { style: 'color:red' }).text(e.toString()));
+                    this.showError(e.toString());
                 }
                 this.children(':first-child').children(':first-child').append(` (${((Date.now() - start) / 1000).toFixed(1)}s)`);
+            }
+
+            showError(text) {
+                this.children(':last-child').append($('<div/>', { style: 'color:red' }).text(text));
             }
 
             async addToPrompt() {
