@@ -21,6 +21,9 @@ let chatMeta = {
             "key": "model",
             "type": "enum",
             "options": [
+                { "key": "gpt-4.1-2025-04-14" },
+                { "key": "gpt-4.1-mini-2025-04-14" },
+                { "key": "gpt-4.1-nano-2025-04-14" },
                 { "key": "gpt-4o-mini-2024-07-18" },
                 { "key": "gpt-4o-2024-05-13" },
                 { "key": "gpt-4o-2024-08-06" },
@@ -30,7 +33,8 @@ let chatMeta = {
                 { "key": "gpt-4-1106-preview" },
                 { "key": "gpt-4-turbo-2024-04-09" },
                 { "key": "gpt-3.5-turbo" },
-                { "key": "gpt-3.5-turbo-16k" }
+                { "key": "gpt-3.5-turbo-16k" },
+                { "key": "deepseekv3", value: "deepseek-ai/DeepSeek-V3" }
             ]
         },
         {
